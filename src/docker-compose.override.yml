@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  catalogPdb:
+    container_name: catalogPdb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  catal.apis:
+    container_name: catalapis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://127.0.0.1:27017"
+    depends_on:
+      - catalogPdb
+    ports:
+      - "8000:80"

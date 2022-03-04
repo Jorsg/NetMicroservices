@@ -1,0 +1,26 @@
+db.Products.insertMany([
+  {
+     'Name' : 'Asus Laptop',
+     'Category': 'Computer',
+     'Summary': 'Summary',
+     'Description': 'Description',
+     'ImageFile': 'ImageFile',
+     'Price': 54.32  
+  },
+  {
+     'Name' : 'Appel Laptop',
+     'Category': 'Computer',
+     'Summary': 'Summary',
+     'Description': 'Description',
+     'ImageFile': 'ImageFile',
+     'Price': 1000.32  
+  },
+  {
+     'Name' : 'Hp Laptop',
+     'Category': 'Computer',
+     'Summary': 'Summary',
+     'Description': 'Description',
+     'ImageFile': 'ImageFile',
+     'Price': 500.32  
+  }
+])
