@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Catal.APIs.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class CatalogController : ControllerBase
     {
@@ -31,7 +31,7 @@ namespace Catal.APIs.Controllers
         public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
         {
             var product = await _repository.GetProducts();
-            if (product is null)
+            if (product.Count() <= 0)
                 return BadRequest();
 
             return Ok(product);
