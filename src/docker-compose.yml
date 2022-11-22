@@ -8,9 +8,6 @@ services:
   basketdb:
     image: redis:alpine
 
-  discoutdb:
-    image: postgres
-
   discountdb:
     image: postgres
 
@@ -36,11 +33,19 @@ services:
     image: ${DOCKER_REGISTRY-}discountapi
     build:
       context: .
-      dockerfile: Services/Discount/Discount.API/Dockerfile
+      dockerfile: Services/Discount/Discount.API/Dockerfile 
+
+  discount.api.grpc:
+    image: ${DOCKER_REGISTRY-}discountapigrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.API.Grpc/Dockerfile
 
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
+
+
 

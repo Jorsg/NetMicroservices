@@ -1,4 +1,5 @@
-﻿using Discount.Grcp.Repositories;
+﻿using Discount.Grap.Services;
+using Discount.Grcp.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,7 @@ namespace Discount.Grap
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+           // services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
         }
 

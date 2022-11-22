@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Discount.Grap
+namespace Discount.Grap.Services
 {
     public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
     {

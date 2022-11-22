@@ -1,11 +1,11 @@
-﻿using Discount.Grcp.Entities;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 using Npgsql;
 using Dapper;
+using Discount.API.Grcp.Entities;
 
-namespace Discount.Grcp.Repositories
+namespace Discount.API.Grcp.Repositories
 {
     public class DiscountRepository : IDiscountRepository
     {
@@ -29,7 +29,7 @@ namespace Discount.Grcp.Repositories
                 return false;
 
             return true;
-        }
+        }       
 
         public async Task<bool> DeleteDiscount(string productName)
         {
