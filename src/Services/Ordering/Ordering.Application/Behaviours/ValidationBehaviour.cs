@@ -1,13 +1,10 @@
-﻿using System;
+﻿using FluentValidation;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.TestHelper;
-using FluentValidation.Validators;
-using MediatR;
 using ValidationException = Ordering.Application.Exceptions.ValidationException;
 
 namespace Ordering.Application.Behaviours

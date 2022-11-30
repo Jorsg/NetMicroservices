@@ -24,7 +24,7 @@ namespace Ordering.Application.Contracts.Persistence
 
         Task<T> GetAsync(int id);
         Task<T> AddAsync(T entity);
-        Task<T> UpdateAsync(T entity);
-        Task<T> DeñeteAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleeteAsync(T entity);
     }
 }
