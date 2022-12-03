@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Ordering.Application.Features.Orders.Commands;
+using Ordering.Application.Features.Orders.Commands.CheckoutOrde;
 using Ordering.Application.Features.Orders.Queries.GetOrderList;
 using Ordering.Domain.Entities;
 
