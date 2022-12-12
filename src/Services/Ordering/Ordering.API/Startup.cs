@@ -23,6 +23,8 @@ namespace Ordering.API
         {
             services.AddApplicationServices();
             services.AddInfraestructureService(Configuration);
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
