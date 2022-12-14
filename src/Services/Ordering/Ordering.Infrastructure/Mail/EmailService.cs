@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Ordering.Application.Contracts.Infraestructure;
 using Ordering.Application.Models;
 using SendGrid;
@@ -13,13 +14,13 @@ namespace Ordering.Infrastructure.Mail
 {
     public class EmailService : IEmailService
     {
-        public EmailSenttings _emailSettings {  get; }
+        public EmailSettings _emailSettings {  get; }
         public ILogger<EmailService> _logger { get; }
 
-        public EmailService(EmailSenttings emailSettings, ILogger<EmailService> logger)
+        public EmailService(IOptions<EmailSettings> emailSettings, ILogger<EmailService> logger)
         {
-            _emailSettings = emailSettings ?? throw new ArgumentNullException(nameof(emailSettings));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _emailSettings = emailSettings.Value;
+            _logger = logger;
         }
 
         public async Task<bool> SendEmail(Email email)

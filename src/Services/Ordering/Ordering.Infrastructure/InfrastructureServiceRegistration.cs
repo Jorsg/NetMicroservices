@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Contracts.Infraestructure;
 using Ordering.Application.Contracts.Persistence;
 using Ordering.Application.Models;
 using Ordering.Infrastructure.Mail;
@@ -24,8 +25,8 @@ namespace Ordering.Infrastructure
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped<IOrderRepository,OrderRepository>();
 
-            services.Configure<EmailSenttings>(c => configuration.GetSection("EmailSetting"));
-            services.AddTransient<EmailService, EmailService>();
+            services.Configure<EmailSettings>(c => configuration.GetSection("EmailSetting"));
+            services.AddTransient<IEmailService, EmailService>();
 
             return services;
         }
