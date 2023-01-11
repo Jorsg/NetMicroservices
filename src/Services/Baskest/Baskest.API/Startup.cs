@@ -1,18 +1,14 @@
 using Baskest.API.GrpcServices;
 using Baskest.API.Repositories;
 using Discount.API.Grpc;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Baskest.API
 {
@@ -28,16 +24,28 @@ namespace Baskest.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Redis  Configuration
             services.AddStackExchangeRedisCache(opt =>
             {
                 opt.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
             });
 
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddAutoMapper(typeof(Startup));
 
+            //Grpc Configuration
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
                 o => o.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
             services.AddScoped<DiscountGrpcService>();
+
+            // MassTransit-RabbitMQ Configuration
+            services.AddMassTransit(confg =>
+            {
+                confg.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

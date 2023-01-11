@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Baskest.API.Entities;
-
+using EventBus.Messages.Events;
 
 namespace Baskest.API.Mapper
 {
@@ -8,7 +8,7 @@ namespace Baskest.API.Mapper
     {
         public BasketProfile() 
         {
-           // CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
+            CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
         }
     }
 }
