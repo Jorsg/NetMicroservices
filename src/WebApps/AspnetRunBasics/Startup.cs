@@ -1,11 +1,10 @@
-using AspnetRunBasics.Data;
-using AspnetRunBasics.Repositories;
+using AspnetRunBasics.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace AspnetRunBasics
 {
@@ -28,20 +27,27 @@ namespace AspnetRunBasics
             //    c.UseInMemoryDatabase("AspnetRunConnection"));
 
             // add database dependecy
-            services.AddDbContext<AspnetRunContext>(c =>
-                c.UseSqlServer(Configuration.GetConnectionString("AspnetRunConnection")));
+            //services.AddDbContext<AspnetRunContext>(c =>
+            //    c.UseSqlServer(Configuration.GetConnectionString("AspnetRunConnection")));
 
             #endregion            
 
             #region project services
 
             // add repository dependecy
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<ICartRepository, CartRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<IContactRepository, ContactRepository>();
+            //services.AddScoped<IProductRepository, ProductRepository>();
+            //services.AddScoped<ICartRepository, CartRepository>();
+            //services.AddScoped<IOrderRepository, OrderRepository>();
+            //services.AddScoped<IContactRepository, ContactRepository>();
 
             #endregion
+
+            services.AddHttpClient<ICatalogService, CatalogService>(c =>
+                c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
+            services.AddHttpClient<IBasketService, BasketService>(c =>
+                c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
+            services.AddHttpClient<IOrderService, OrderService>(c =>
+                c.BaseAddress = new Uri(Configuration["ApiSettings:GatewayAddress"]));
 
             services.AddRazorPages();
         }
