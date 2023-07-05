@@ -1,5 +1,6 @@
 ﻿using Catal.APIs.Entities;
 using Catal.APIs.Repositories;
+using Catal.APIs.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,12 +18,14 @@ namespace Catal.APIs.Controllers
     public class CatalogController : ControllerBase
     {
         private readonly IProductRepository _repository;
+        private readonly IProductService _productService;
         private readonly ILogger<CatalogController> _logger;
 
-        public CatalogController(IProductRepository repository, ILogger<CatalogController> logger)
+        public CatalogController(IProductRepository repository, ILogger<CatalogController> logger, IProductService productService)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
         [HttpGet]
