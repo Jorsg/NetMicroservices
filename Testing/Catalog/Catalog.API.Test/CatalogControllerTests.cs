@@ -46,6 +46,17 @@ namespace Catalog.API.Test
 			
 		}
 
+		[Test]
+		public void GetProducts_WhenCalled_ReturnBadRequets()
+		{
+			var products = SetupErrorProduct();
+			_productRepository.Setup(c => c.GetProducts()).Throws<WebException>();
+			var result = _catalogController.GetProducts().IsFaulted;
+
+			Assert.IsNotNull(result);
+			Assert.That(result, Is.True);
+		}
+
 
 		private async Task<IEnumerable<Products>> SetupProducts()
 		{
@@ -57,6 +68,14 @@ namespace Catalog.API.Test
 			products.Add(new Products { Category = "kitchen", Description = "knif", Id = "56", Name = "knife", Price = 10, Summary = "nothing", ImageFile = "img/knif.kpg" });
 
 			return products;
+		}
+
+		private async Task<IEnumerable<Products>> SetupErrorProduct()
+		{
+			var products = new List<Products>();
+			products.Add(new Products { Category = "toy", Description = "captan American", Id = "23", Name = "Captan America", Summary = "Toy to all children", ImageFile = "img/captan.jpg" });
+			return products.ToList();
+
 		}
 	}
 }
